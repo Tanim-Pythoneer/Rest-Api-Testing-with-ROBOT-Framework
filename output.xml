@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.2.1 (Python 3.8.2 on darwin)" generated="20200913 00:13:48.893" rpa="false">
+<suite id="s1" name="TC3 PostRequest" source="/Users/tanimkamal/Documents/APIautomation/TC3_PostRequest.robot">
+<test id="s1-t1" name="TC_003 Create New Resource">
+<kw name="Create Session" library="RequestsLibrary">
+<doc>Create Session: create a HTTP session to a server</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>${BASE_URL}</arg>
+</arguments>
+<msg timestamp="20200913 00:13:48.983" level="INFO">Creating Session using : alias=AddData, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20200913 00:13:48.983" endtime="20200913 00:13:48.983"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>first_name=Tanim</arg>
+<arg>middle_name=Showkat</arg>
+<arg>last_name=Kamal</arg>
+<arg>date_of_birth=02/08/1985</arg>
+</arguments>
+<assign>
+<var>&amp;{body}</var>
+</assign>
+<msg timestamp="20200913 00:13:48.984" level="INFO">&amp;{body} = { first_name=Tanim | middle_name=Showkat | last_name=Kamal | date_of_birth=02/08/1985 }</msg>
+<status status="PASS" starttime="20200913 00:13:48.984" endtime="20200913 00:13:48.984"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Content-Type=application/json</arg>
+</arguments>
+<assign>
+<var>&amp;{header}</var>
+</assign>
+<msg timestamp="20200913 00:13:48.984" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20200913 00:13:48.984" endtime="20200913 00:13:48.984"></status>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<doc>Send a POST request on the session object found using the
+given `alias`</doc>
+<arguments>
+<arg>AddData</arg>
+<arg>api/studentsDetails</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+</arguments>
+<assign>
+<var>${response}</var>
+</assign>
+<msg timestamp="20200913 00:13:49.371" level="INFO">POST Request : url=http://thetestingworldapi.com//api/studentsDetails 
+ path_url=//api/studentsDetails 
+ headers={'User-Agent': 'python-requests/2.23.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '102'} 
+ body={"first_name": "Tanim", "middle_name": "Showkat", "last_name": "Kamal", "date_of_birth": "02/08/1985"} 
+ </msg>
+<msg timestamp="20200913 00:13:49.372" level="INFO">POST Response : url=http://thetestingworldapi.com//api/studentsDetails 
+ status=201, reason=Created 
+ body={"id":69442,"first_name":"Tanim","middle_name":"Showkat","last_name":"Kamal","date_of_birth":"02/08/1985"} 
+ </msg>
+<msg timestamp="20200913 00:13:49.372" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20200913 00:13:48.985" endtime="20200913 00:13:49.372"></status>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+</arguments>
+<msg timestamp="20200913 00:13:49.373" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;type 'unicode'&gt;</msg>
+<status status="PASS" starttime="20200913 00:13:49.373" endtime="20200913 00:13:49.373"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.status_code}</arg>
+</arguments>
+<status status="PASS" starttime="20200913 00:13:49.374" endtime="20200913 00:13:49.374"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${response.content}</arg>
+</arguments>
+<status status="PASS" starttime="20200913 00:13:49.374" endtime="20200913 00:13:49.375"></status>
+</kw>
+<status status="PASS" starttime="20200913 00:13:48.982" endtime="20200913 00:13:49.375" critical="yes"></status>
+</test>
+<status status="PASS" starttime="20200913 00:13:48.897" endtime="20200913 00:13:49.377"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0">Critical Tests</stat>
+<stat pass="1" fail="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" id="s1" name="TC3 PostRequest">TC3 PostRequest</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
